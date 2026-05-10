@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | AI SaaS</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script type="module">
+    import { checkAuthStatus } from './js/auth.js';
+    // Protect this route: require authentication
+    checkAuthStatus(true);
+  </script>
+</head>
+<body>
+  
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <svg xmlns="http://www.w3.org/-2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+      Nexus<span>AI</span>
+    </div>
+    <div class="nav-user">
+      <span class="user-email" id="user-email">Loading...</span>
+      <button id="logout-btn" class="btn-logout">Logout</button>
+    </div>
+  </nav>
+
+  <main class="dashboard-container">
+    <section class="hero">
+      <h2>Welcome to your Workspace</h2>
+      <p>Supercharge your career with AI. Upload your existing resume for analysis or build a new one from scratch using our intelligent tools.</p>
+    </section>
+
+    <div class="features-grid">
+      <!-- Upload Resume Card -->
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/-2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+        </div>
+        <h3>Upload Resume</h3>
+        <p>Upload your existing PDF or Word document. Our AI will analyze your skills and provide actionable improvement suggestions.</p>
+        <button class="btn btn-secondary mt-4">Upload Document</button>
+      </div>
+
+      <!-- Build Resume Card -->
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/-2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="M9 15h6"/></svg>
+        </div>
+        <h3>Build Resume</h3>
+        <p>Create a professional, ATS-friendly resume from scratch using our interactive AI builder and premium templates.</p>
+        <button class="btn btn-secondary mt-4">Start Building</button>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="./js/auth.js"></script>
+</body>
+</html>
