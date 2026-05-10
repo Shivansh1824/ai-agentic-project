@@ -1,0 +1,14 @@
+# Secrets and environments
+.env
+.env.local
+.env.*
+
+# OS generated files
+.DS_Store
+
+# Node modules
+node_modules/
+
+# Supabase
+supabase/.temp/
+supabase/functions/*/node_modules/
