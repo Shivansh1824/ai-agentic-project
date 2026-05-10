@@ -63,7 +63,7 @@ CREATE TRIGGER on_auth_user_created
 
 -- 2. resumes
 CREATE TABLE public.resumes (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     user_id UUID NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE,
     original_resume_name TEXT NOT NULL,
     original_resume_text TEXT,
@@ -106,7 +106,7 @@ CREATE POLICY "Users can delete their own resumes"
 
 -- 3. refined_resumes
 CREATE TABLE public.refined_resumes (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     resume_id UUID NOT NULL REFERENCES public.resumes(id) ON DELETE CASCADE,
     user_id UUID NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE,
     refined_resume_text TEXT NOT NULL,
@@ -146,7 +146,7 @@ CREATE POLICY "Users can delete their own refined resumes"
 
 -- 4. interview_sessions
 CREATE TABLE public.interview_sessions (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     user_id UUID NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE,
     resume_id UUID REFERENCES public.resumes(id) ON DELETE SET NULL,
     interview_level interview_level NOT NULL DEFAULT 'intermediate',
@@ -186,7 +186,7 @@ CREATE POLICY "Users can delete their own interview sessions"
 
 -- 5. interview_questions
 CREATE TABLE public.interview_questions (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     session_id UUID NOT NULL REFERENCES public.interview_sessions(id) ON DELETE CASCADE,
     question_text TEXT NOT NULL,
     user_answer TEXT,

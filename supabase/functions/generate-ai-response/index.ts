@@ -6,7 +6,7 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 }
 
-Deno.serve(async (req) => {
+Deno.serve(async (req: Request) => {
   // Handle CORS preflight request
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders })
@@ -28,13 +28,14 @@ Deno.serve(async (req) => {
     }
 
     // 3. Make the secure server-side request to the Google API
-    // Using gemini-2.5-flash as the default fast/capable model
-    const googleEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GOOGLE_API_KEY}`
+    // Using gemini-3.0-flash as requested
+    const googleEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.0-flash:generateContent`
     
     const googleResponse = await fetch(googleEndpoint, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'X-goog-api-key': GOOGLE_API_KEY,
       },
       body: JSON.stringify({
         contents: [
@@ -68,11 +69,12 @@ Deno.serve(async (req) => {
       },
     )
 
-  } catch (error) {
+  } catch (error: unknown) {
     // Catch any errors and return them cleanly
-    console.error("Function error:", error.message)
+    const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
+    console.error("Function error:", errorMessage)
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: errorMessage }),
       { 
         headers: { 
           ...corsHeaders, 
